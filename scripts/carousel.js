@@ -2,7 +2,6 @@ function Carousel (option) {
   this.el = option.el;
   this.imgURLs = option.imgURLs;
   this.hasBtns = option.hasBtns || true;
-  this.isMoveing = false;
   this.timeId = null;
   this.interval = option.interval || 5000;
   this.container = document.querySelector(this.el);
@@ -13,9 +12,6 @@ Carousel.prototype = {
   init: function () {
     var that = this;
     this.imgList = this.createImgList();
-    // this.imgList.addEventListener('transitionend', function (e) {
-    //   that.isMoveing = false;
-    // }, false);
     if(this.hasBtns) {
       this.btnList = this.createBtnList();
     }
@@ -52,10 +48,13 @@ Carousel.prototype = {
     this.imgHeight= img.clientHeight;
   },
   initBtnList: function () {
-    var btns = this.btnList.querySelectorAll('div');
-    btns[0].className = 'active-btn';
+    this.btns = this.btnList.querySelectorAll('div');
+    this.btns[0].className = 'active-btn';
     var that = this;
     this.btnList.addEventListener('click', function (e) {
+      if (e.target === e.currentTarget) {
+        return;
+      }
       clearTimeout(that.timeId);
       that.move(e.target.dataset.index);
     })
@@ -65,12 +64,18 @@ Carousel.prototype = {
     this.container.style.width = this.imgWidth + 'px';
     this.container.style.height = this.imgHeight + 'px';
   },
-  move: function (nextIndex) {
-    // if (this.isMoveing) {
-    //   return;
-    // }
-    this.imgList.style.marginLeft = - (this.imgWidth * nextIndex) + 'px';
+  move: function (index) {
+    debugger
+    this.btns.forEach(function (btn, btnIndex) {
+      if (btnIndex === Number(index)) {
+        btn.classList.add('active-btn');
+      } else {
+        btn.classList.remove('active-btn');
+      }
+    });
+    this.imgList.style.marginLeft = - (this.imgWidth * index) + 'px';
     var that = this;
-    this.timeId = setTimeout(this.move.bind(this, (++nextIndex) % this.imgNumber), this.interval);
+    var nextIndex = ++index % this.imgNumber;
+    this.timeId = setTimeout(this.move.bind(this, nextIndex), this.interval);
   }
 };

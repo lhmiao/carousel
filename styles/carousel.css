@@ -1,0 +1,42 @@
+.carousel-img-list {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.carousel-img-list img {
+  flex: 0 0 auto;
+}
+
+.add-transition {
+  transition: margin-left 500ms;
+}
+
+.delete-transition {
+  transition-duration: 0;
+}
+
+.carousel-btn-list {
+  position: relative;
+  top: -8%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-btn-list div {
+  width: 0.6em;
+  height: 0.6em;
+  border: 1px solid #38f;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.carousel-btn-list div + div {
+  margin-left: 0.8em;
+}
+
+.active-btn {
+  background: #38f;
+}

@@ -1,0 +1,11 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#carousel {
+  overflow: hidden;
+  width: 768px;
+  height: 432px;
+  margin: 200px auto;
+}

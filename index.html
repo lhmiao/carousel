@@ -10,7 +10,7 @@
 </head>
 <body>
   <div id="carousel">
-    <div class="carousel-img-list add-transition">
+    <!-- <div class="carousel-img-list add-transition">
       <img src="./images/1.jpg">
       <img src="./images/2.jpg">
       <img src="./images/3.jpg">
@@ -23,8 +23,15 @@
       <div></div>
       <div></div>
       <div></div>
-    </div>
+    </div> -->
   </div>
   <script src="./scripts/carousel.js"></script>
+  <script>
+    var carouselOption = {
+      el: '#carousel',
+      imgURLs: ['./images/1.jpg', './images/2.jpg', './images/3.jpg']
+    };
+    new Carousel(carouselOption);
+  </script>
 </body>
 </html>

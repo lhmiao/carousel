@@ -16,13 +16,40 @@
   transition-duration: 0;
 }
 
+.carousel-arrow-list {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  transform: translateY(-50%);
+  user-select: none;
+}
+
+.carousel-arrow-left,
+.carousel-arrow-right {
+  font-size: 3em;
+  color: #38f;
+  background: rgba(0, 0, 0, .2);
+  cursor: pointer;
+}
+
+.carousel-arrow-left:hover,
+.carousel-arrow-right:hover {
+  background: rgba(0, 0, 0, .4);
+}
+
 .carousel-btn-list {
-  position: relative;
-  top: -8%;
+  position: absolute;
+  top: 92%;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  user-select: none;
 }
 
 .carousel-btn-list div {

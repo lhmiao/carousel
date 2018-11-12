@@ -1,9 +1,16 @@
 function Carousel (option) {
+  option = Object.assign({
+    hasBtns: true,
+    hasArrows: true,
+    interval: 5000
+  }, option);
   this.el = option.el;
   this.imgURLs = option.imgURLs;
-  this.hasBtns = option.hasBtns || true;
-  this.hasArrows = option.hasArrows || true;
-  this.interval = option.interval || 5000;
+  this.hasBtns = option.hasBtns;
+  this.hasArrows = option.hasArrows;
+  this.interval = option.interval;
+  // 实际移动间隔要加上移动所花费的500ms
+  this.interval += 500;
   this.timeId = null;
   this.currentIndex = 0;
   this.container = document.querySelector(this.el);
@@ -25,8 +32,8 @@ Carousel.prototype = {
     }
     window.addEventListener('load', function () {
       that.initImgInfo();
-      that.initArrowList();
-      that.initBtnList();
+      that.hasArrows && that.initArrowList();
+      that.hasBtns && that.initBtnList();
       that.initContainer();
       that.move(0);
     }, false);
@@ -99,14 +106,14 @@ Carousel.prototype = {
     this.container.style.height = this.imgHeight + 'px';
   },
   move: function (currentIndex) {
-    this.btns.forEach(function (btn, btnIndex) {
+    this.hasBtns && this.btns.forEach(function (btn, btnIndex) {
       if (btnIndex === Number(currentIndex)) {
         btn.classList.add('active-btn');
       } else {
         btn.classList.remove('active-btn');
       }
     });
-    this.imgList.style.marginLeft = - (this.imgWidth * currentIndex) + 'px';
+    this.imgList.style.transform = 'translateX(' + (- this.imgWidth * currentIndex) + 'px)';
     this.currentIndex = currentIndex;
     var nextIndex = (currentIndex + 1) % this.imgNumber;
     this.timeId = setTimeout(this.move.bind(this, nextIndex), this.interval);

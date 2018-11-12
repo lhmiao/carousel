@@ -9,7 +9,7 @@
 }
 
 .add-transition {
-  transition: margin-left 500ms;
+  transition: transform 500ms;
 }
 
 .delete-transition {

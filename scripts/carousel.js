@@ -1,9 +1,9 @@
 function Carousel (option) {
-  option = Object.assign({
+  Object.assign(option, {
     hasBtns: true,
     hasArrows: true,
     interval: 5000
-  }, option);
+  });
   this.el = option.el;
   this.imgURLs = option.imgURLs;
   this.hasBtns = option.hasBtns;
